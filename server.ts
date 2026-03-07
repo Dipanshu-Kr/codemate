@@ -8,7 +8,15 @@ import { fileURLToPath } from "url";
 import { GoogleGenAI } from "@google/genai";
 import { WebSocketServer, WebSocket } from "ws";
 import { createServer } from "http";
+import pkg from "pg";
+const { Pool } = pkg;
 
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
+});
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
